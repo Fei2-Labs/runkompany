@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kompany — Your AI company that runs itself</title>
+<meta name="description" content="Kompany is an autonomous AI company engine. Send a directive, the AI CEO routes it, agents execute, you approve. Built for founders who run alone.">
+<meta property="og:title" content="Kompany — Your AI company that runs itself">
+<meta property="og:description" content="Send a directive. The AI CEO routes it, agents execute, you approve what ships.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://runkompany.com/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>⚙️</text></svg>">
+<style>
+:root{
+  --bg:#0a0a0f;--bg2:#10101a;--panel:#14141f;--border:#23232f;
+  --text:#e8e8f0;--muted:#8b8b9a;--accent:#6e7bff;--accent2:#9d6eff;
+  --mono:'SF Mono',ui-monospace,Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;backdrop-filter:blur(12px);background:rgba(10,10,15,.75);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:700;font-size:18px;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--muted)}
+nav ul a:hover{color:var(--text)}
+.btn{display:inline-block;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:600;transition:.2s}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+.btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--border);color:var(--muted)}
+.btn-ghost:hover{color:var(--text);border-color:var(--muted)}
+
+/* hero */
+.hero{padding:96px 0 64px;text-align:center}
+.tag{display:inline-block;font:12px var(--mono);color:var(--accent);border:1px solid var(--border);border-radius:99px;padding:4px 14px;margin-bottom:24px;background:var(--bg2)}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.08;letter-spacing:-.03em;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub{max-width:620px;margin:20px auto 32px;color:var(--muted);font-size:19px}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* terminal mock */
+.term{max-width:760px;margin:64px auto 0;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-align:left;box-shadow:0 24px 80px rgba(110,123,255,.12)}
+.term-bar{display:flex;gap:7px;padding:12px 16px;border-bottom:1px solid var(--border)}
+.term-bar i{width:11px;height:11px;border-radius:50%;background:#3a3a48}
+.term-bar i:first-child{background:#ff5f57}.term-bar i:nth-child(2){background:#febc2e}.term-bar i:nth-child(3){background:#28c840}
+.term pre{padding:22px 24px;font:13.5px/1.75 var(--mono);color:#b8c2e8;overflow-x:auto}
+.term .p{color:var(--accent)}.term .g{color:#5dd97c}.term .y{color:#e8c66b}.term .d{color:#6b6b7a}
+
+/* sections */
+section{padding:88px 0}
+.kicker{font:12px var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--accent);margin-bottom:12px}
+h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;line-height:1.15;margin-bottom:14px}
+.lead{color:var(--muted);max-width:560px}
+
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:56px 0}
+.feature:nth-child(even) .f-text{order:2}
+.f-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:26px;font:13px/1.8 var(--mono);color:#a8b2d8}
+.f-card b{color:var(--text)}
+.f-text h3{font-size:24px;margin-bottom:10px;letter-spacing:-.01em}
+.f-text p{color:var(--muted)}
+
+/* lifecycle */
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.step{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:24px 20px;position:relative}
+.step .n{font:12px var(--mono);color:var(--accent)}
+.step h4{margin:8px 0 6px;font-size:17px}
+.step p{font-size:14px;color:var(--muted)}
+
+/* newsletter */
+.news{background:linear-gradient(180deg,var(--bg2),var(--bg));border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+.news form{display:flex;gap:10px;justify-content:center;max-width:460px;margin:28px auto 0;flex-wrap:wrap}
+.news input[type=email]{flex:1;min-width:240px;padding:12px 16px;border-radius:8px;border:1px solid var(--border);background:var(--panel);color:var(--text);font-size:15px}
+.news input[type=email]:focus{outline:none;border-color:var(--accent)}
+.news small{display:block;margin-top:14px;color:var(--muted)}
+
+/* footer */
+footer{padding:48px 0;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+
+@media(max-width:760px){
+  .feature{grid-template-columns:1fr;gap:24px}
+  .feature:nth-child(even) .f-text{order:0}
+  .cycle{grid-template-columns:1fr 1fr}
+  nav ul{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#">K<span>ompany</span></a>
+    <ul>
+      <li><a href="#how">How it works</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#subscribe">Updates</a></li>
+    </ul>
+    <a class="btn btn-primary" href="#subscribe">Get early access</a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="tag">autonomous company engine</div>
+  <h1>Your AI company<br>that <em>runs itself</em></h1>
+  <p class="sub">Send one directive. The AI CEO classifies it, routes it to agents, executes the work, and asks you only when it matters. You approve. It ships.</p>
+  <div class="hero-ctas">
+    <a class="btn btn-primary" href="#subscribe">Join the waitlist</a>
+    <a class="btn btn-ghost" href="#how">See how it works</a>
+  </div>
+
+  <div class="term">
+    <div class="term-bar"><i></i><i></i><i></i></div>
+    <pre><span class="p">you ›</span> launch the product homepage, research design first
+
+<span class="d">[ceo]</span> directive classified: <span class="y">new project</span>
+<span class="d">[ceo]</span> created <b>KPNY-001</b> · phase 1: design research
+<span class="d">[agent:research]</span> 40 reference pages analyzed <span class="g">✓</span>
+<span class="d">[agent:build]</span> site built, newsletter wired <span class="g">✓</span>
+<span class="d">[ceo]</span> gate: deploy to production?
+
+<span class="p">you ›</span> go
+<span class="d">[ceo]</span> live at runkompany.com <span class="g">✓</span> · cost: $0.03</pre>
+  </div>
+</header>
+
+<section id="how" class="wrap">
+  <div class="kicker">How it works</div>
+  <h2>One directive in. Shipped work out.</h2>
+  <p class="lead">Kompany is not a chatbot. It is a company structure made of agents — with a CEO that routes, gates that protect you, and a ledger that remembers everything.</p>
+  <div class="cycle">
+    <div class="step"><div class="n">01 · directive</div><h4>You speak</h4><p>One sentence in natural language. No tickets, no specs, no meetings.</p></div>
+    <div class="step"><div class="n">02 · route</div><h4>CEO classifies</h4><p>The AI CEO turns it into a project, picks the agents, sets the phases.</p></div>
+    <div class="step"><div class="n">03 · execute</div><h4>Agents work</h4><p>Research, build, write, publish — autonomously, in parallel, with budgets.</p></div>
+    <div class="step"><div class="n">04 · approve</div><h4>You decide</h4><p>Irreversible actions stop at a gate. One word from you releases them.</p></div>
+  </div>
+</section>
+
+<section id="features" class="wrap">
+  <div class="kicker">Features</div>
+  <h2>Built like a company, not a chat window.</h2>
+
+  <div class="feature">
+    <div class="f-text">
+      <h3>An AI CEO that actually manages</h3>
+      <p>Every directive is classified, scoped, and delegated. Projects get IDs, phases, and gates. Unclear requests come back as one sharp question — not a wall of guesses.</p>
+    </div>
+    <div class="f-card"><b>[ceo]</b> KPNY-001 · phase 1/3 active<br>├── research: <b>done</b><br>├── design: gated → awaiting GO<br>└── build: locked<br><br><b>[ledger]</b> ai cost today: $0.14</div>
+  </div>
+
+  <div class="feature">
+    <div class="f-text">
+      <h3>Approval gates, not blind autonomy</h3>
+      <p>Agents run free on reversible work. Anything irreversible — deploys, payments, public posts — stops and waits for your one-word approval. Full audit trail in the ledger.</p>
+    </div>
+    <div class="f-card"><b>[gate]</b> publish to production?<br>&nbsp;&nbsp;diff: +412 −0 · cost est: $0.02<br>&nbsp;&nbsp;risk: public, reversible via rollback<br><br><span style="color:#5dd97c">approve</span> · revise · reject · snooze</div>
+  </div>
+
+  <div class="feature">
+    <div class="f-text">
+      <h3>Memory that compounds</h3>
+      <p>Every project, decision, and lesson lands in persistent memory. Your company gets smarter every week — patterns become playbooks, playbooks become reflexes.</p>
+    </div>
+    <div class="f-card"><b>[memory]</b> 8 operating patterns loaded<br>├── verify-public-urls<br>├── journal-is-published-data<br>└── autonomous-git<br><br>recall: <b>before</b> every task</div>
+  </div>
+</section>
+
+<section id="subscribe" class="news">
+  <div class="wrap">
+    <div class="kicker">Early access</div>
+    <h2>Watch a one-person AI company get built.</h2>
+    <p class="lead" style="margin:0 auto">Build logs, real costs, real revenue numbers. No hype — just what the agents actually shipped this week.</p>
+    <form action="https://formsubmit.co/news@runkompany.com" method="POST">
+      <input type="hidden" name="_subject" value="Kompany newsletter signup">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://runkompany.com/thanks.html">
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <button class="btn btn-primary" type="submit">Subscribe</button>
+    </form>
+    <small>One email a week. Unsubscribe anytime.</small>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Kompany · a Swedexpress project</div>
+    <div><a href="https://x.com/prompt_nova" rel="noopener">Follow the build on X →</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
