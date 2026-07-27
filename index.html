@@ -71,6 +71,29 @@ h2{font-size:clamp(26px,4vw,38px);letter-spacing:-.02em;line-height:1.15;margin-
 .step h4{margin:8px 0 6px;font-size:17px}
 .step p{font-size:14px;color:var(--muted)}
 
+/* memory system */
+.mem-layers{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+.mem{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:24px 18px;position:relative;overflow:hidden}
+.mem::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:.6}
+.mem .tier{font:11px var(--mono);color:var(--accent);letter-spacing:.08em;text-transform:uppercase}
+.mem h4{margin:10px 0 8px;font-size:17px}
+.mem p{font-size:13.5px;color:var(--muted);line-height:1.65}
+.mem .meta{margin-top:14px;font:11.5px var(--mono);color:#6b6b7a;border-top:1px solid var(--border);padding-top:12px}
+.mem .meta b{color:#a8b2d8}
+.mem-flow{display:flex;align-items:center;justify-content:center;gap:8px;margin:40px 0 8px;font:12px var(--mono);color:var(--muted);flex-wrap:wrap}
+.mem-flow .arr{color:var(--accent)}
+.mem-flow b{color:var(--text);font-weight:600}
+.mem-pipeline{max-width:880px;margin:32px auto 0;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:24px 28px;font:13px/1.85 var(--mono);color:#a8b2d8}
+.mem-pipeline b{color:var(--text)}
+.mem-pipeline .p{color:var(--accent)}
+.mem-pipeline .g{color:#5dd97c}
+.mem-pipeline .y{color:#e8c66b}
+.mem-pipeline .d{color:#6b6b7a}
+.mem-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.mem-stat{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 20px}
+.mem-stat .v{font:24px var(--mono);color:var(--accent);font-weight:700}
+.mem-stat .l{font-size:13px;color:var(--muted);margin-top:4px}
+
 /* newsletter */
 .news{background:linear-gradient(180deg,var(--bg2),var(--bg));border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
 .news form{display:flex;gap:10px;justify-content:center;max-width:460px;margin:28px auto 0;flex-wrap:wrap}
@@ -86,6 +109,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
   .feature{grid-template-columns:1fr;gap:24px}
   .feature:nth-child(even) .f-text{order:0}
   .cycle{grid-template-columns:1fr 1fr}
+  .mem-layers{grid-template-columns:1fr}
+  .mem-stats{grid-template-columns:1fr}
+  .mem-flow{font-size:11px}
   nav ul{display:none}
 }
 </style>
@@ -98,6 +124,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
     <ul>
       <li><a href="#how">How it works</a></li>
       <li><a href="#features">Features</a></li>
+      <li><a href="#memory">Memory</a></li>
       <li><a href="#subscribe">Updates</a></li>
     </ul>
     <a class="btn btn-primary" href="#subscribe">Get early access</a>
@@ -163,9 +190,72 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
   <div class="feature">
     <div class="f-text">
       <h3>Memory that compounds</h3>
-      <p>Every project, decision, and lesson lands in persistent memory. Your company gets smarter every week — patterns become playbooks, playbooks become reflexes.</p>
+      <p>Every project, decision, and lesson lands in a four-layer memory system. Your company gets smarter every week — raw episodes become distilled patterns, patterns become reflexes. <a href="#memory" style="color:var(--accent);text-decoration:underline">See how it works →</a></p>
     </div>
-    <div class="f-card"><b>[memory]</b> 8 operating patterns loaded<br>├── verify-public-urls<br>├── journal-is-published-data<br>└── autonomous-git<br><br>recall: <b>before</b> every task</div>
+    <div class="f-card"><b>[memory]</b> 4 layers · 1 SQLite store<br>├── episodes (raw project records)<br>├── reflections (per-task lessons)<br>├── distilled patterns (cross-project)<br>└── recall (utility-ranked injection)<br><br>recall: <b>before</b> every task</div>
+  </div>
+</section>
+
+<section id="memory" class="wrap">
+  <div class="kicker">Memory system</div>
+  <h2>A company that remembers what it learned.</h2>
+  <p class="lead">Kompany doesn't just log history — it distills it. Every finished project becomes a structured episode, every episode feeds a retrospective, every retrospective extracts patterns, and every pattern gets injected back into the agents that need it. The company gets sharper with each directive.</p>
+
+  <div class="mem-flow">
+    <b>Project ships</b> <span class="arr">→</span> <b>Episode</b> <span class="arr">→</span> <b>Reflect</b> <span class="arr">→</span> <b>Distill</b> <span class="arr">→</span> <b>Recall</b> <span class="arr">→</span> <b>Next task is smarter</b>
+  </div>
+
+  <div class="mem-layers">
+    <div class="mem">
+      <div class="tier">Layer 1 · Raw</div>
+      <h4>Episodes</h4>
+      <p>When a project is delivered, six source tables — tasks, ledger, decisions, debates, audit log, agent memories — flatten into one structured <code>EpisodePayloadV1</code> JSON document. One row, one project, the full story.</p>
+      <div class="meta"><b>project_episodes</b> table<br>retention: <b>full</b> for recent N, <b>summary</b> for older<br>rebuildable from source tables anytime</div>
+    </div>
+    <div class="mem">
+      <div class="tier">Layer 2 · Per-task</div>
+      <h4>Reflections</h4>
+      <p>Agents write reflections during execution — what worked, what broke, what they'd do differently. These land in <code>agent_memories</code> tagged <code>category='reflection'</code> and flow into the episode payload at delivery time.</p>
+      <div class="meta"><b>agent_memories</b> table<br>knowledge_type: <b>experiential</b><br>permanent, merged during distillation</div>
+    </div>
+    <div class="mem">
+      <div class="tier">Layer 3 · Cross-project</div>
+      <h4>Distilled patterns</h4>
+      <p>The Chief of Staff agent runs a retrospective across recent episodes, extracts durable cross-project patterns, and UPSERTs each one into memory keyed by <code>(agent_role, pattern_key)</code>. Inferred-only claims with no evidence trail are rejected before they pollute memory.</p>
+      <div class="meta">runs as <b>CoS</b> directive<br>evidence-trace guard: <b>no episode IDs = rejected</b><br>confidence score stored in metadata</div>
+    </div>
+    <div class="mem">
+      <div class="tier">Layer 4 · Injection</div>
+      <h4>Recall</h4>
+      <p>Before every task, relevant memories are pulled and injected into the agent's prompt. Retrieval is utility-ranked: keyword hits + recency bonus + access frequency + pattern confidence. Memories that keep getting used rank higher over time.</p>
+      <div class="meta">score = <b>keyword + recency + log(access) + 2×confidence</b><br>access tracking: <b>only on injection</b><br>stale facts auto-expired via <code>valid_until</code></div>
+    </div>
+  </div>
+
+  <div class="mem-pipeline">
+<span class="d"># project delivered → episode materialized</span>
+<span class="p">[engine]</span> run_retrospective(KPNY-001)
+<span class="d">[episodes]</span> materialize → <b>EpisodePayloadV1</b> <span class="g">✓</span>
+<span class="d">[episodes]</span> record_or_update → <b>project_episodes</b> <span class="g">✓</span>
+<span class="d">[audit]</span> learning.episode_recorded
+
+<span class="d"># CoS runs distillation across recent episodes</span>
+<span class="p">[cos]</span> distill(since=30d)
+<span class="d">[cos]</span> 12 episodes in → 5 patterns extracted
+<span class="d">[guard]</span> 2 inferred-only claims <span class="y">rejected</span> (no evidence_episode_ids)
+<span class="d">[memory]</span> upsert 3 patterns → agent_memories <span class="g">✓</span>
+<span class="d">[audit]</span> learning.distillation_run · cost: $0.04
+
+<span class="d"># next directive — recall before task</span>
+<span class="p">[agent:build]</span> recall(query="deploy static site", limit=5)
+<span class="d">[memory]</span> 3 patterns matched · score-ranked · access_count++
+<span class="d">[agent:build]</span> prior learnings injected into prompt <span class="g">✓</span>
+  </div>
+
+  <div class="mem-stats">
+    <div class="mem-stat"><div class="v">6 → 1</div><div class="l">Source tables flattened into one episode row</div></div>
+    <div class="mem-stat"><div class="v">utility-ranked</div><div class="l">Recall scoring: keyword + recency + access + confidence</div></div>
+    <div class="mem-stat"><div class="v">evidence-gated</div><div class="l">Distilled patterns without episode evidence are rejected</div></div>
   </div>
 </section>
 
