@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <circle cx="128" cy="128" r="124" fill="#000000"/>
+  <circle cx="128" cy="128" r="112" fill="none" stroke="#00ff41" stroke-width="10" filter="url(#glow)"/>
+  <text x="128" y="178"
+        font-family="'JetBrains Mono','Courier New',Courier,monospace"
+        font-size="140" font-weight="800" text-anchor="middle"
+        fill="#00ff41" filter="url(#glow)">K</text>
+</svg>

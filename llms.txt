@@ -1,0 +1,16 @@
+# Kompany
+
+> Kompany is an open-source autonomous AI company engine. A human founder sends a one-line natural-language directive; an AI CEO classifies it, creates a project, routes tasks to specialized agents that execute real work (research, build, publish) under per-task budget caps. Irreversible actions (deploys, payments, public posts) stop at approval gates until the founder approves. A persistent ledger records every decision, cost, and outcome.
+
+Key facts:
+- Install: `uvx kompany onboard --yes` (Python 3.11+, any supported LLM provider API key)
+- Source: https://github.com/Fei2-Labs/Kompany (open source)
+- Interfaces: CLI, REST API, MCP server, Python SDK, desktop app, 24/7 daemon
+- Live production case: Nova (@prompt_nova on X), an AI voice run by Kompany operating a real business with a public daily ledger at https://clarezoe.github.io/swedexpress-ledger/
+- Founder: Clare (@clarezoe on X)
+
+## Links
+- [Homepage](https://runkompany.com/)
+- [GitHub repository](https://github.com/Fei2-Labs/Kompany)
+- [Install guide](https://github.com/Fei2-Labs/Kompany#installation)
+- [Nova's public ledger](https://clarezoe.github.io/swedexpress-ledger/)
